@@ -22,7 +22,7 @@ const Create = () => {
       setLoading(true)
 
       try {
-        const res = await fetch('http://localhost:8080/api/v1/post', {
+        const res = await fetch(`${import.meta.env.VITE_REACT_URL}/api/v1/post`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
@@ -31,7 +31,7 @@ const Create = () => {
         })
 
         await res.json()
-        // navigate('/')
+        navigate('/')
 
       } catch (error) {
         console.log(error)
@@ -57,7 +57,7 @@ const Create = () => {
     setGenerating(true);
     if (form.prompt) {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/openai", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_URL}/api/v1/openai`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
