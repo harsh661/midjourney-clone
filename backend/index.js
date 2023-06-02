@@ -15,7 +15,7 @@ app.use("/api/v1/post", postRoutes);
 app.use("/api/v1/openai", openaiRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Welcome to OpenAI powered Midjourney Clone");
+  res.status(200).json({success: true});
 });
 
 
