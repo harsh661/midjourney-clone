@@ -55,7 +55,7 @@ const FormField = ({
       {button && (
         <button
           onClick={generateImage}
-          className="px-3 my-5 w-full py-2 md:py-3 cursor-pointer bg-accent text-white rounded-lg"
+          className={`${value.length ? 'block' : 'hidden'} px-3 my-5 w-full py-2 md:py-3 cursor-pointer bg-accent text-white rounded-lg`}
         >
           Generate Image
         </button>

@@ -11,7 +11,6 @@ const Home = ({ text }) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
 
   useEffect(() => {
-    console.log(import.meta.env.VITE_REACT_URL)
     const fetchPosts = async () => {
       setLoading(true);
 
@@ -47,16 +46,15 @@ const Home = ({ text }) => {
             item.name.toLowerCase().includes(searchText.toLowerCase()) ||
             item.prompt.toLowerCase().includes(searchText.toLowerCase())
         );
-        console.log(searchResults)
         setSearchResult(searchResults);
       }, 500)
     );
   };
 
-  if (loading) return <Loader />;
+  // if (loading) return <Loader />;
 
   return (
-    <section className="p-5 lg:p-10 max-w-screen-2xl xl:w-available lg:w-full overflow-scroll w-screen lg:h-responsive_height h-full_image">
+    <section className="p-5 lg:p-10 max-w-7xl mx-auto xl:w-available lg:w-full overflow-scroll no_scroll w-screen lg:h-responsive_height h-full_image">
       <div className="max-w-7xl mx-auto font-medium flex items-center justify-between">
         <h1 className="text-4xl leading-relaxed">Community Showcase</h1>
 
@@ -75,7 +73,7 @@ const Home = ({ text }) => {
         className="w-full rounded-lg bg-lighter p-3 mt-2 outline-none border-none"
       />
       {allPosts && (
-        <div className="py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-4">
+        <div className="py-10 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-4">
           {searchText ? (
             <>
               {searchResult?.map((post) => (

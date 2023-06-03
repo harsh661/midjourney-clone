@@ -7,10 +7,12 @@ const downloadImage = async (_id, photo) => {
 
 const PostCard = ({ photo, prompt, name, _id }) => {
   return (
-    <div className="rounded-lg max-w-lg group bg-lighter relative flex items-center">
+    <div className="rounded-lg max-w-lg group animate-slide-in bg-lighter relative flex items-center">
+      <a target="_blank" href={photo}>
       <img src={photo} alt="AI image" className="w-full h-full rounded-lg" />
-      <div className="hidden group-hover:flex cursor-default flex-col gap-2 p-3 m-2 rounded-md bg-lighter text-light_font text-sm absolute bottom-0 right-0 left-0">
-        <span className="text-sm text-[#ff4c00]">/v5_upscale</span>
+      </a>
+      <div className="hidden md:group-hover:flex cursor-default flex-col gap-2 p-3 m-2 rounded-md bg-main text-light_font text-sm absolute bottom-0 right-0 left-0">
+        <span className="text-sm text-alternative">/v5_upscale</span>
         <p>{prompt}</p>
 
         <div className="flex w-full items-center justify-between pt-1">

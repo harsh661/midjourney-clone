@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import search from "../assets/search.svg";
+import community from "../assets/community.svg";
 import signin from "../assets/signin.svg";
 
 const Sidebar = ({ shown }) => {
   return (
     <div
-      className={`h-responsive p-3 ${
+      className={`h-responsive_height p-3 ${
         shown ? "block" : "hidden lg:block"
       } animate-slide-right group relative lg:absolute xl:relative h-screen z-10`}
     >
@@ -26,10 +26,10 @@ const Sidebar = ({ shown }) => {
           </Link>
 
           {/* Search button */}
-          <span className="p-3 hover:bg-hover/50 rounded-lg flex items-center gap-3 cursor-pointer">
-            <img src={search} alt="search" className="w-5 h-5" />
+          <Link to="/" className="p-3 hover:bg-hover/50 rounded-lg flex items-center gap-3 cursor-pointer">
+            <img src={community} alt="community" className="w-5 h-5" />
             <span className="pr-2 lg:hidden xl:block group-hover:block">Community Showcase</span>
-          </span>
+          </Link>
         </div>
         <span className="p-3 hover:bg-hover/50 rounded-lg flex items-center gap-3 cursor-pointer w-full">
           <img src={signin} alt="search" className="w-5 h-5" />
