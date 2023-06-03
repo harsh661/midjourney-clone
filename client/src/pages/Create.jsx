@@ -12,10 +12,10 @@ const Create = () => {
     photo: "",
     size: "",
   });
-  const [generating, setGenerating] = useState(true);
+  const [generating, setGenerating] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(true);
-  const [showImg, setShowImg] = useState(false);
+  const [err, setErr] = useState(false);
 
   //Post image in database
   const postImage = async () => {
@@ -76,9 +76,8 @@ const Create = () => {
         const data = await response.json();
 
         setForm({ ...form, photo: `data:image/jpg;base64,${data.photo}` });
-        setShowImg(true);
       } catch (error) {
-        console.log(error);
+        setErr(true);
       } finally {
         setGenerating(false);
       }
@@ -93,7 +92,11 @@ const Create = () => {
   return (
     <section className="p-5 pt-0 lg:p-10 lg:pt-10 max-w-7xl mx-auto xl:w-available lg:w-full w-screen h-full_image overflow-scroll no_scroll">
       <div className="max-w-2xl font-medium pb-10">
-        <h1 className="text-4xl leading-relaxed">Unleash your Imaginations</h1>
+        <h1 className="text-4xl leading-relaxed">
+          {!err
+            ? "Unleash Your imaginations"
+            : "Your prompt may contain text that is not allowed by our safety system."}
+        </h1>
         {showForm ? (
           <form>
             <div className="py-10 flex flex-col lg:flex-row items-center">
@@ -129,30 +132,46 @@ const Create = () => {
                 generating && "bg-lighter/50"
               } rounded-lg`}
             >
+              {/* Show generating loader */}
               {generating && (
                 <span className="animate-pulse text-xl">Generating...</span>
               )}
-              {showImg && (
-                <img
-                  src={form.photo}
-                  alt="AI generated image"
-                  className="w-full h-full rounded-lg"
-                />
+
+              {/* If there's an error show this error image */}
+              <img
+                className={`${err ? "block" : "hidden"} rounded-lg`}
+                src="https://cdn.openai.com/labs/assets/images/errors/task_error_generic.webp"
+                alt="Error"
+              />
+
+              {/* If image gets genrated then display it */}
+              {form.photo && (
+                <>
+                  <img
+                    src={form.photo}
+                    alt="AI generated image"
+                    className="w-full h-full rounded-lg"
+                  />
+                  <button className="absolute bottom-5 right-5 bg-lighter p-2 rounded-full hover:bg-hover/50">
+                    <svg
+                      onClick={() => downloadImage(form.name, form.photo)}
+                      width="30"
+                      height="30"
+                      fill="currentColor"
+                      className="cursor-pointer"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                    </svg>
+                  </button>
+                </>
               )}
-              <button className="absolute bottom-5 right-5 bg-lighter p-2 rounded-full hover:bg-hover/50">
-                <svg
-                  onClick={() => downloadImage(form.name, form.photo)}
-                  width="30"
-                  height="30"
-                  fill="currentColor"
-                  className="cursor-pointer"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                </svg>
-              </button>
             </div>
-            <div className="flex items-center justify-between max-w-2xl mx-auto">
+            <div
+              className={`${
+                form.photo ? "flex": "hidden"
+              } items-center justify-between max-w-2xl mx-auto`}
+            >
               <button
                 onClick={postImage}
                 className="px-5 flex-1 py-2 md:w-max bg-alternative text-white rounded-lg"
