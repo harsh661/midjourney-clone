@@ -14,6 +14,7 @@ body {
   color: var(--text-color);
   background: var(--main-bg);
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .h-responsive {
