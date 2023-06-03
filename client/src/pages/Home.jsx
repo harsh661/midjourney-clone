@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import trending from "../assets/trending.svg";
+import search from "../assets/search.svg";
 import { PostCard, Loader } from "../components";
 
 const Home = ({ text }) => {
@@ -65,13 +66,21 @@ const Home = ({ text }) => {
           <img src={trending} alt="Add" className="w-5 h-5" /> <span>Add</span>
         </Link>
       </div>
-      <input
-        type="text"
-        value={searchText}
-        onChange={handleChange}
-        placeholder="Search Community"
-        className="w-full rounded-lg bg-lighter p-3 mt-2 outline-none border-none"
-      />
+
+      {/* Search bar with icon */}
+      <div className="w-full flex gap-2 items-center rounded-lg bg-lighter p-3 mt-2 outline-none border-none">
+        <label htmlFor="search">
+          <img src={search} alt="search" className="w-5"/>
+        </label>
+        <input
+          id="search"
+          type="text"
+          value={searchText}
+          onChange={handleChange}
+          placeholder="Search Community"
+          className="w-full rounded-lg bg-lighter outline-none border-none"
+        />
+      </div>
       {allPosts && (
         <div className="py-10 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 place-items-center gap-4">
           {searchText ? (
