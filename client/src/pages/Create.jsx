@@ -37,7 +37,7 @@ const Create = () => {
         await res.json();
         navigate("/");
       } catch (error) {
-        console.log(error);
+        alert("Something went wrong while sharing");
       } finally {
         setLoading(false);
       }
@@ -58,7 +58,7 @@ const Create = () => {
 
   //Generate Image functionalty
   const generateImage = async (e) => {
-    e.preventDefalut();
+    e.preventDefault();
 
     setShowForm(false);
     setGenerating(true);
