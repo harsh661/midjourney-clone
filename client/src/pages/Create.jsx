@@ -57,30 +57,30 @@ const Create = () => {
   };
 
   //Generate Image functionalty
-  const generateImage = async () => {
+  const generateImage = async (e) => {
+    e.preventDefalut();
+
     setShowForm(false);
     setGenerating(true);
-    if (form.prompt) {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_REACT_URL}/api/v1/openai`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ prompt: form.prompt }),
-          }
-        );
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_URL}/api/v1/openai`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        }
+      );
 
-        const data = await response.json();
+      const data = await response.json();
 
-        setForm({ ...form, photo: `data:image/jpg;base64,${data.photo}` });
-      } catch (error) {
-        setErr(true);
-      } finally {
-        setGenerating(false);
-      }
+      setForm({ ...form, photo: `data:image/jpg;base64,${data.photo}` });
+    } catch (error) {
+      setErr(true);
+    } finally {
+      setGenerating(false);
     }
   };
 
@@ -98,7 +98,7 @@ const Create = () => {
             : "Your prompt may contain text that is not allowed by our safety system."}
         </h1>
         {showForm ? (
-          <form>
+          <form onSubmit={generateImage}>
             <div className="py-10 flex flex-col lg:flex-row items-center">
               <div className="flex flex-col gap-10 w-full">
                 <FormField
@@ -122,6 +122,14 @@ const Create = () => {
                   generateImage={generateImage}
                   button
                 />
+                <button
+                  type="submit"
+                  className={`${
+                    form.prompt.length ? "block" : "hidden"
+                  } px-3 my-5 w-full py-2 md:py-3 cursor-pointer bg-accent text-white rounded-lg`}
+                >
+                  Generate Image
+                </button>
               </div>
             </div>
           </form>
@@ -169,7 +177,7 @@ const Create = () => {
             </div>
             <div
               className={`${
-                form.photo ? "flex": "hidden"
+                form.photo ? "flex" : "hidden"
               } items-center justify-between max-w-2xl mx-auto`}
             >
               <button

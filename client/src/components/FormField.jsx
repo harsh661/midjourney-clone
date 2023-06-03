@@ -11,8 +11,6 @@ const FormField = ({
   resize,
   surprise,
   surpriseMe,
-  generateImage,
-  button,
 }) => {
   return (
     <div className="flex flex-col gap-3 text-zinc-400">
@@ -51,14 +49,6 @@ const FormField = ({
           value={value}
           onChange={handleChange}
         />
-      )}
-      {button && (
-        <button
-          onClick={generateImage}
-          className={`${value.length ? 'block' : 'hidden'} px-3 my-5 w-full py-2 md:py-3 cursor-pointer bg-accent text-white rounded-lg`}
-        >
-          Generate Image
-        </button>
       )}
     </div>
   );
