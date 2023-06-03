@@ -91,7 +91,7 @@ const Create = () => {
   };
 
   return (
-    <section className="p-5 lg:p-10 max-w-7xl mx-auto xl:w-available lg:w-full w-screen h-full_image overflow-scroll no_scroll">
+    <section className="p-5 pt-0 lg:p-10 lg:pt-10 max-w-7xl mx-auto xl:w-available lg:w-full w-screen h-full_image overflow-scroll no_scroll">
       <div className="max-w-2xl font-medium pb-10">
         <h1 className="text-4xl leading-relaxed">Unleash your Imaginations</h1>
         {showForm ? (

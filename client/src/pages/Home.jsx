@@ -54,7 +54,7 @@ const Home = ({ text }) => {
   // if (loading) return <Loader />;
 
   return (
-    <section className="p-5 lg:p-10 max-w-7xl mx-auto xl:w-available lg:w-full overflow-scroll no_scroll w-screen lg:h-responsive_height h-full_image">
+    <section className="p-5 pt-0 lg:p-10 lg:pt-10 max-w-7xl mx-auto xl:w-available lg:w-full overflow-scroll no_scroll w-screen lg:h-responsive_height h-full_image">
       <div className="max-w-7xl mx-auto font-medium flex items-center justify-between">
         <h1 className="text-4xl leading-relaxed">Community Showcase</h1>
 
